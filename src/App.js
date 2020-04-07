@@ -1,6 +1,8 @@
 import React from 'react';
 import TodoList from "./components/TodoList"
 import TodoForm from "./components/TodoForm"
+import "./components/Todo.css"
+import "./index.css"
 const toDoList = [
   {
     task: 'Organize Garage',
@@ -22,9 +24,10 @@ class App extends React.Component {
   // design `App` to be the parent component of your application.
   // this component is going to take care of state, and any change handlers you need to work with your state
   toggleToDo = toDoId => {
+    console.log(toDoId)
     this.setState({
       toDos: this.state.toDos.map(toDo=> {
-        if(toDo === toDo.id){
+        if(toDoId === toDo.id){
           console.log(toDo)
           return {
             ...toDo,completed: !toDo.completed
@@ -45,6 +48,12 @@ class App extends React.Component {
       }
     ]})
   }
+  clearCompleted = event => {
+    event.preventDefault()
+    this.setState({
+            toDos: this.state.toDos.filter(item => !item.completed)
+    });
+  };
 
   render() {
     return (
@@ -54,6 +63,7 @@ class App extends React.Component {
         <TodoList 
         toDoList={this.state.toDos}
         toggleToDo={this.toggleToDo}
+        clearCompleted={this.clearCompleted}
         />
       </div>
     );

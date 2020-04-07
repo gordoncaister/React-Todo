@@ -1,0 +1,8 @@
+.todo{
+    
+    cursor:pointer;
+}
+.completed {
+    color: grey;
+    text-decoration:line-through;
+}
